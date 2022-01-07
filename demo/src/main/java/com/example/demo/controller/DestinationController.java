@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.destination.DestinationEntity;
+import com.example.demo.destination.DestinationDto;
+import com.example.demo.destination.entity.DestinationEntity;
 import com.example.demo.service.DestinationService;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Destination;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -20,22 +20,22 @@ public class DestinationController {
     }
 
     @PostMapping("/add")
-    public DestinationEntity addDestination(@Valid @RequestBody DestinationEntity destination) {
-        return destinationService.addDestination(destination);
+    public DestinationDto addDestination(@Valid @RequestBody DestinationDto payload) {
+        return destinationService.addDestination(payload);
     }
 
     @PutMapping("/update")
-    public DestinationEntity updateDestination(@Valid @RequestBody DestinationEntity destination) {
-        return destinationService.updateDestination(destination);
+    public ResponseEntity<DestinationDto> updateDestination(@Valid @RequestBody DestinationDto payload) {
+        return destinationService.updateDestination(payload);
     }
 
     @GetMapping
-    public List<DestinationEntity> getDestinations() {
+    public List<DestinationDto> getDestinations() {
         return destinationService.getAllDestinations();
     }
 
     @GetMapping("/{id}")
-    public DestinationEntity getDestinationById(@PathVariable("id") Long id) {
+    public List<DestinationDto> getDestinationById(@PathVariable("id") Long id) {
         return destinationService.findDestinationById(id);
     }
 
@@ -43,4 +43,7 @@ public class DestinationController {
     public void deleteDestinationById(@PathVariable("id") Long id) {
         destinationService.deleteDestination(id);
     }
+
+
+
 }
