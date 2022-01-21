@@ -1,6 +1,5 @@
 package com.example.demo.order;
 
-import com.example.demo.OrderStatus;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -11,13 +10,14 @@ public class OrderDto {
     Long id;
 
     @NotEmpty
-    String dateCreated;
+    String deliveryDate;
 
-    @NotEmpty
+//    @NotEmpty
     String lastUpdated;
 
-    @NotEmpty
+//    @NotEmpty
     OrderStatus status;
 
+    @NotEmpty
     String destination;
 }

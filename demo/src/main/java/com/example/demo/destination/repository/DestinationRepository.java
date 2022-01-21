@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface DestinationRepository extends CrudRepository<DestinationEntity, Long> {
 
-
+        public DestinationEntity findDestinationByName(String cityName);
 }

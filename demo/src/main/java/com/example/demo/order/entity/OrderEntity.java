@@ -1,12 +1,13 @@
 package com.example.demo.order.entity;
 
-import com.example.demo.OrderStatus;
+import com.example.demo.order.OrderStatus;
 import com.example.demo.destination.entity.DestinationEntity;
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Entity(name = "orders")
 @Data
@@ -30,12 +31,9 @@ public class OrderEntity {
     public OrderEntity(DestinationEntity destination, Long deliveryDate) {
         this.destination = destination;
         this.deliveryDate = deliveryDate;
-    }
 
-    public OrderEntity(DestinationEntity destination, Long deliveryDate, Long lastUpdated) {
-        this.destination = destination;
-        this.deliveryDate = deliveryDate;
-        this.lastUpdated = lastUpdated;
+        ZonedDateTime startOfToday = LocalDate.now().atStartOfDay(ZoneId.systemDefault());
+        this.lastUpdated = startOfToday.toEpochSecond() * 1000;
     }
 
     public OrderEntity() {
